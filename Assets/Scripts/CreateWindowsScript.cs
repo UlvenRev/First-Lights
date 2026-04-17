@@ -10,6 +10,8 @@ public class CreateWindowsScript : MonoBehaviour
     [SerializeField] private float horizontalGap;
 
     [SerializeField] private float verticalGap;
+
+    public bool finishedSpawningWindows = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,5 +40,7 @@ public class CreateWindowsScript : MonoBehaviour
                 -1
             );
         }
+
+        finishedSpawningWindows = true;
     } 
 }

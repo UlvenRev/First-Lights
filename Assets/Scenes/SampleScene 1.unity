@@ -868,6 +868,8 @@ GameObject:
   - component: {fileID: 1217996438}
   - component: {fileID: 1217996437}
   - component: {fileID: 1217996436}
+  - component: {fileID: 1217996440}
+  - component: {fileID: 1217996439}
   m_Layer: 0
   m_Name: building_1
   m_TagString: Untagged
@@ -888,10 +890,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   windowOffPrefab: {fileID: 8825256522308039293, guid: a13de2e5f7e6d0d4a8b29552168ae696, type: 3}
-  windowsAmount: 63
+  windowsAmount: 56
   columns: 7
   horizontalGap: 0.45
   verticalGap: 0.45
+  finishedSpawningWindows: 0
 --- !u!212 &1217996437
 SpriteRenderer:
   serializedVersion: 2
@@ -966,6 +969,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217996439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217996435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55881ea908afa894c88cb5eba5822840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  windowOffSprite: {fileID: 21300000, guid: a06c669df5e384542b30d2cb2c2dbac1, type: 3}
+  windowOnSprite: {fileID: 21300000, guid: a26b16822a95f5b4aa74279ca4840fe4, type: 3}
+  offSound: {fileID: 8300000, guid: 1e442a5bad9981e46828728f46348ad9, type: 3}
+--- !u!114 &1217996440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217996435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caa4fae80bd7e340a53fce5d743c2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  windowsNumToClick: 3
+  windowsForSequence: 
+  windowOffSprite: {fileID: 21300000, guid: a06c669df5e384542b30d2cb2c2dbac1, type: 3}
+  windowOnSprite: {fileID: 21300000, guid: a26b16822a95f5b4aa74279ca4840fe4, type: 3}
+  offSound: {fileID: 8300000, guid: 1e442a5bad9981e46828728f46348ad9, type: 3}
+  onSound: {fileID: 8300000, guid: f798446b38751494c97d7ae19edac308, type: 3}
 --- !u!1 &1288438594
 GameObject:
   m_ObjectHideFlags: 0
