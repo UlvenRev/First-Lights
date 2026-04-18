@@ -3,7 +3,7 @@ using UnityEngine;
 public class CreateWindowsScript : MonoBehaviour
 {
     [SerializeField] private GameObject windowOffPrefab;
-    [SerializeField] private int windowsAmount;
+    public int windowsAmount;
 
     [SerializeField] private int columns;
 
@@ -11,11 +11,12 @@ public class CreateWindowsScript : MonoBehaviour
 
     [SerializeField] private float verticalGap;
 
-    public bool finishedSpawningWindows = false;
+    private CreateSequenceScript createSequenceScript;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        createSequenceScript = GetComponent<CreateSequenceScript>();
         SpawnWindows();
     }
 
@@ -41,6 +42,6 @@ public class CreateWindowsScript : MonoBehaviour
             );
         }
 
-        finishedSpawningWindows = true;
+        createSequenceScript.StartNewRound();
     } 
 }

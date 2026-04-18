@@ -6,22 +6,35 @@ using System.Collections;
 public class CreateSequenceScript : MonoBehaviour
 {
     [SerializeField] private int windowsNumToClick;
-    public int[] windowsForSequence; 
+    private int[] windowsForSequence; 
+	private int totalWindowsNumber;
     
+    public bool canClick;  // For Check Sequence
+    
+    // ----------- Sprites -----------
     [SerializeField] private Sprite windowOffSprite;
     [SerializeField] private Sprite windowOnSprite;
     
+    // ----------- Sound management -----------
     [SerializeField] private AudioClip offSound;
     [SerializeField] private AudioClip onSound;
     private float volume = 1f;
 
+    // ----------- Scripts  -----------
     private CreateWindowsScript createWindowsScript;
-    private bool showedWindowsForSequence = false;
-    private bool finishedSpawningWindows = false;
+    private CheckSequenceScript checkSequenceScript;
 
-    void Start()
+    void Awake()  // On Awake so that it creates windowsForSequence faster than Check Sequence Script requests it
     {
         createWindowsScript = GetComponent<CreateWindowsScript>();
+        checkSequenceScript = GetComponent<CheckSequenceScript>();
+        
+		totalWindowsNumber = createWindowsScript.windowsAmount;
+    }
+
+    public void StartNewRound()
+    {
+        canClick = false;
         
         windowsForSequence = new int[windowsNumToClick];
         for (int i = 0; i < windowsForSequence.Length; i++) {
@@ -31,23 +44,12 @@ public class CreateSequenceScript : MonoBehaviour
         CreateRandomSequence();
     }
 
-    void Update()
-    {
-        finishedSpawningWindows = createWindowsScript.finishedSpawningWindows;
-        
-        if (!showedWindowsForSequence && finishedSpawningWindows)
-        {
-            StartCoroutine(ShowWindowsSequence());
-            showedWindowsForSequence = true;  // We need to run coroutine only once, so making sure we won't be running it every update
-        }
-    }
-
     public void CreateRandomSequence()
     {
         for (int i = 0; i < windowsNumToClick; i++)
         {
-            int randomWindow = UnityEngine.Random.Range(0, 64);
-            while (windowsForSequence.Contains(randomWindow)) randomWindow = UnityEngine.Random.Range(0, 64);  // To avoid repetitios
+            int randomWindow = UnityEngine.Random.Range(0, totalWindowsNumber);
+            while (windowsForSequence.Contains(randomWindow)) randomWindow = UnityEngine.Random.Range(0, totalWindowsNumber);  // To avoid repetitios
             windowsForSequence[i] = randomWindow;
         }
 
@@ -56,6 +58,10 @@ public class CreateSequenceScript : MonoBehaviour
         {
             Debug.Log(windowsForSequence[i]);
         }
+
+        checkSequenceScript.GetWindowSequence(windowsForSequence);
+
+        StartCoroutine(ShowWindowsSequence());
     }
 
     IEnumerator ShowWindowsSequence()
@@ -90,6 +96,7 @@ public class CreateSequenceScript : MonoBehaviour
         {
             child.GetComponent<SpriteRenderer>().sprite = windowOffSprite;
         }
-        
+
+        canClick = true;
     }
 }
