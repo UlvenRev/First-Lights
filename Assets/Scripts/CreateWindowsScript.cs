@@ -6,17 +6,14 @@ public class CreateWindowsScript : MonoBehaviour
     public int windowsAmount;
 
     [SerializeField] private int columns;
-
     [SerializeField] private float horizontalGap;
-
     [SerializeField] private float verticalGap;
-
-    private CreateSequenceScript createSequenceScript;
+    [SerializeField] private float leftOffset;
+    [SerializeField] private float topOffset;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        createSequenceScript = GetComponent<CreateSequenceScript>();
         SpawnWindows();
     }
 
@@ -36,12 +33,10 @@ public class CreateWindowsScript : MonoBehaviour
             float startY = halfBuildingHeight - (windowHeight / 2) - 0.25f;
             
             window.transform.localPosition = new Vector3(
-                startX + horizontalGap * (i % columns), 
-                startY - horizontalGap * (i / columns), 
+                startX + horizontalGap * (i % columns) + leftOffset, 
+                startY - verticalGap * (i / columns) - topOffset, 
                 -1
             );
         }
-
-        createSequenceScript.StartNewRound();
     } 
 }

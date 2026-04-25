@@ -19,9 +19,8 @@ public class HandleWindowClick : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
-        var parentName = transform.parent.name;
-        checkSequenceScript = GameObject.Find(parentName).GetComponent<CheckSequenceScript>();
-        createSequenceScript = GameObject.Find(parentName).GetComponent<CreateSequenceScript>();
+        checkSequenceScript = GetComponentInParent<CheckSequenceScript>();
+        createSequenceScript = GetComponentInParent<CreateSequenceScript>();
     }
 
     public void OnPointerDown(PointerEventData eventData)

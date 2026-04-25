@@ -13,10 +13,13 @@ public class CheckSequenceScript : MonoBehaviour
     // ----------- Sound management -----------
     [SerializeField] private AudioClip offSound;
     private float volume = 1f;
+    
+    private LevelManager levelManager;
 
     void Start()
     {
         createSequenceScript = GetComponent<CreateSequenceScript>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     public void GetWindowSequence(int[] windowsForSequence)
@@ -50,7 +53,7 @@ public class CheckSequenceScript : MonoBehaviour
             Debug.Log("Creating a new sequence. Look at the screen and remember...");
         
             ResetWindows();
-            createSequenceScript.StartNewRound();
+            levelManager.OnLevelComplete();
         } else if (wrongCount + correctCount >= windowsToCheck.Length)
         {
             Debug.Log("SEQUENCE FAILED");
